@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Authentication</title>
+</head>
+<body>
+    <h1>Iris Authentication</h1>
+    <p>Please look into the camera for iris recognition.</p>
+
+    <video id="videoElement" autoplay></video>
+    
+    <script>
+        // Camera stream logic for capturing iris
+        var video = document.querySelector("#videoElement");
+
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.log("Something went wrong with the camera.");
+            });
+        }
+    </script>
+
+    <form action="/authenticate" method="POST">
+        <button type="submit">Authenticate</button>
+    </form>
+</body>
+</html>
